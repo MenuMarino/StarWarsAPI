@@ -57,7 +57,7 @@ info:
   description: API para obtener información sobre Star Wars
   version: 1.0.0
 paths:
-  //get-resource:
+  /get-resource:
     get:
       operationId: getResource
       summary: Obtiene uno o múltiples recursos de Star Wars
@@ -65,13 +65,13 @@ paths:
         Obtiene la información de un recurso específico o todos los recursos
         existentes en DynamoDB
       responses:
-        '200':
+        "200":
           description: Status 200 Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetResourceModel'
-  //create-resource:
+                $ref: "#/components/schemas/GetResourceModel"
+  /create-resource:
     post:
       operationId: createResource
       summary: Crea un nuevo recurso de Star Wars
@@ -79,9 +79,9 @@ paths:
         Obtiene la información utilizando el API de Star Wars y la almacena en
         DynamoDB
       responses:
-        '201':
+        "201":
           description: Status 201 Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateResourceResponseModel'
+                $ref: "#/components/schemas/CreateResourceResponseModel"
