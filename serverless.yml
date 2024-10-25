@@ -1,0 +1,75 @@
+org: menumarino
+app: starwars-api
+service: starwars-api
+
+package:
+  individually: true
+  exclude:
+    - handlers/**
+
+custom:
+  dynamodbTable: StarWarsResources
+  documentation: ${file(serverless.doc.yml):documentation}
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+  environment:
+    SW_DYNAMODB_TABLE: ${self:custom.dynamodbTable}
+    SW_API: https://swapi.py4e.com/api
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:PutItem"
+        - "dynamodb:GetItem"
+        - "dynamodb:Scan"
+      Resource: "arn:aws:dynamodb:us-east-1:412381753216:table/${self:custom.dynamodbTable}"
+
+plugins:
+  - serverless-openapi-documentation
+
+functions:
+  getResource:
+    handler: handlers/getResource.handler
+    events:
+      - http:
+          path: /get-resource
+          method: get
+          cors: true
+          documentation: ${file(serverless.doc.yml):endpoints.getResource}
+    package:
+      include:
+        - handlers/getResource.js
+
+  createResource:
+    handler: handlers/createResource.handler
+    events:
+      - http:
+          path: /create-resource
+          method: post
+          cors: true
+          documentation: ${file(serverless.doc.yml):endpoints.createResource}
+    package:
+      include:
+        - handlers/createResource.js
+
+resources:
+  Resources:
+    StarWarsResources:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.dynamodbTable}
+        AttributeDefinitions:
+          - AttributeName: resourceType
+            AttributeType: S
+          - AttributeName: id
+            AttributeType: N
+        KeySchema:
+          - AttributeName: resourceType
+            KeyType: HASH
+          - AttributeName: id
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

@@ -1,0 +1,98 @@
+documentation:
+  version: "1.0.0"
+  title: "Star Wars API"
+  description: "API para obtener información sobre Star Wars"
+  outputFile: openapi.yml
+  models:
+    - name: "CreateResourceModel"
+      description: "Modelo para crear recursos de Star Wars"
+      contentType: "application/json"
+      schema:
+        $schema: "http://json-schema.org/draft-04/schema#"
+        properties:
+          resource:
+            type: string
+            description: "Tipo de recurso"
+          id:
+            type: integer
+            description: "ID del recurso"
+    - name: "CreateResourceResponseModel"
+      description: "Respuesta al crear un recurso exitosamente"
+      contentType: "application/json"
+      schema:
+        $schema: "http://json-schema.org/draft-04/schema#"
+        type: object
+        properties:
+          message:
+            type: string
+            description: "Mensaje de éxito de la operación"
+    - name: "GetResourceModel"
+      description: "Modelo para obtener recursos de Star Wars"
+      contentType: "application/json"
+      schema:
+        $schema: "http://json-schema.org/draft-04/schema#"
+        type: object
+        properties:
+          message:
+            type: string
+            description: "Mensaje de éxito de la operación"
+          data:
+            oneOf:
+              - type: array
+                description: "Lista de recursos obtenidos"
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: "ID del recurso"
+                    resourceType:
+                      type: string
+                      description: "Tipo de recurso"
+                    data:
+                      type: object
+                      description: "Información del recurso"
+                      additionalProperties: true
+              - type: object
+                description: "Un solo recurso obtenido"
+                properties:
+                  id:
+                    type: integer
+                    description: "ID del recurso"
+                  resourceType:
+                    type: string
+                    description: "Tipo de recurso"
+                  data:
+                    type: object
+                    description: "Información del recurso"
+                    additionalProperties: true
+endpoints:
+  getResource:
+    summary: "Obtiene uno o múltiples recursos de Star Wars"
+    description: "Obtiene la información de un recurso específico o todos los recursos existentes en DynamoDB"
+    queryParams:
+      - name: "resource"
+        description: "Tipo de recurso"
+        required: true
+        schema:
+          type: string
+      - name: "id"
+        description: "ID del recurso"
+        required: false
+        schema:
+          type: integer
+    methodResponses:
+      - statusCode: 200
+        responseModels:
+          "application/json": GetResourceModel
+  createResource:
+    summary: "Crea un nuevo recurso de Star Wars"
+    description: "Obtiene la información utilizando el API de Star Wars y la almacena en DynamoDB"
+    requestBody:
+      description: "Nombre del resource y id para buscar"
+    requestModels:
+      "application/json": CreateResourceModel
+    methodResponses:
+      - statusCode: 201
+        responseModels:
+          "application/json": CreateResourceResponseModel
