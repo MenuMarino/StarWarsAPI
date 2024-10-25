@@ -2,7 +2,7 @@
 
 ## Requisitos
 
-- Node.js v20.x
+- Node.js v21.0.5
 - Serverless instalado
 - Credenciales de AWS configuradas para despliegue
 
@@ -111,3 +111,13 @@ Esta ruta obtiene uno o varios recursos almacenados en la base de datos.
     }
   }
   ```
+
+## Testing
+
+Para ejecutar las pruebas unitarias se ejecuta el siguiente comando
+
+```bash
+npx jest
+```
+
+Las pruebas se encuentras definidas en `./__tests__`
