@@ -60,7 +60,7 @@ Esta ruta obtiene uno o varios recursos almacenados en la base de datos.
 
   ```json
   {
-    "message": "Recursos obtenidos exitosamente",
+    "message": "Resources fetched successfully",
     "data": [
       {
         "id": 1,
@@ -94,7 +94,7 @@ Esta ruta obtiene uno o varios recursos almacenados en la base de datos.
 - **Respuesta con ID** (`200 OK`):
   ```json
   {
-    "message": "Recurso obtenido exitosamente",
+    "message": "Resources fetched successfully",
     "data": {
       "id": 1,
       "resourceType": "people",

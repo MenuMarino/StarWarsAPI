@@ -87,9 +87,9 @@ endpoints:
           "application/json": GetResourceModel
   createResource:
     summary: "Crea un nuevo recurso de Star Wars"
-    description: "Obtiene la información utilizando el API de Star Wars y la almacena en DynamoDB"
+    description: "Obtiene la información utilizando el API de Star Wars"
     requestBody:
-      description: "Nombre del resource y id para buscar"
+      description: "Nombre del resource y id para buscar en el API de Star Wars, y almacenar en DynamoDB"
     requestModels:
       "application/json": CreateResourceModel
     methodResponses:

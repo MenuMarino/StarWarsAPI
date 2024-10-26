@@ -31,6 +31,7 @@ describe('getResource', () => {
   });
 
   it('should return 200 and fetch a specific resource if id is provided', async () => {
+    // Mocking successful API call and fetch of an specific resource ID
     getResource.mockResolvedValue({
       id: 1,
       name: 'Luke Skywalker',
@@ -57,6 +58,7 @@ describe('getResource', () => {
   });
 
   it('should return 200 and fetch all resources if no id is provided', async () => {
+    // Mocking successful API call and fetch of all resources
     getAllResources.mockResolvedValue([
       { id: 1, name: 'Luke Skywalker' },
       { id: 2, name: 'Darth Vader' },
@@ -84,6 +86,7 @@ describe('getResource', () => {
   });
 
   it('should return 500 if there is an error fetching resources', async () => {
+    // Mocking failed API call
     getAllResources.mockRejectedValue(new Error('DynamoDB error'));
 
     const event = {

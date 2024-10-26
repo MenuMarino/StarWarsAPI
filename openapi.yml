@@ -64,6 +64,19 @@ paths:
       description: >-
         Obtiene la información de un recurso específico o todos los recursos
         existentes en DynamoDB
+      parameters:
+        - name: resource
+          in: query
+          description: Tipo de recurso
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: query
+          description: ID del recurso (opcional)
+          required: false
+          schema:
+            type: integer
       responses:
         "200":
           description: Status 200 Response
@@ -75,9 +88,7 @@ paths:
     post:
       operationId: createResource
       summary: Crea un nuevo recurso de Star Wars
-      description: >-
-        Obtiene la información utilizando el API de Star Wars y la almacena en
-        DynamoDB
+      description: Obtiene la información utilizando el API de Star Wars
       responses:
         "201":
           description: Status 201 Response
