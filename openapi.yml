@@ -89,6 +89,12 @@ paths:
       operationId: createResource
       summary: Crea un nuevo recurso de Star Wars
       description: Obtiene la información utilizando el API de Star Wars
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateResourceModel"
       responses:
         "201":
           description: Status 201 Response
