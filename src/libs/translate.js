@@ -1,4 +1,4 @@
-const { translations } = require('../constants/translations');
+const { translations } = require('@constants/translations');
 
 /**
  * Translates the keys of the object

@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "aws-sdk": "^2.1691.0",
-    "axios": "^1.7.7"
+    "axios": "^1.7.7",
+    "module-alias": "^2.2.3"
   },
   "devDependencies": {
     "aws-sdk-mock": "^6.2.0",
@@ -9,5 +10,22 @@
     "serverless-aws-documentation": "^1.1.0",
     "serverless-jest-plugin": "^0.4.0",
     "serverless-openapi-documentation": "^0.4.0"
+  },
+  "_moduleAliases": {
+    "@libs": "src/libs",
+    "@domain": "src/domain",
+    "@infrastructure": "src/infrastructure",
+    "@constants": "src/constants"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "@libs/(.*)": "<rootDir>/src/libs/$1",
+      "@domain/(.*)": "<rootDir>/src/domain/$1",
+      "@infrastructure/(.*)": "<rootDir>/src/infrastructure/$1",
+      "@constants/(.*)": "<rootDir>/src/constants/$1"
+    }
   }
 }

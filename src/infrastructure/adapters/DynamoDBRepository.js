@@ -1,6 +1,6 @@
 const AWS = require('aws-sdk');
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
-const ResourceRepository = require('../../domain/ports/ResourceRepository');
+const ResourceRepository = require('@domain/ports/ResourceRepository');
 
 class DynamoDBRepository extends ResourceRepository {
   constructor(tableName) {

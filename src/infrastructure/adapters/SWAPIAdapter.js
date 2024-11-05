@@ -1,4 +1,4 @@
-const { get } = require('../../libs/requests');
+const { get } = require('@libs/requests');
 
 class SWAPIAdapter {
   constructor(baseURL) {
