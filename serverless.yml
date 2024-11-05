@@ -5,7 +5,7 @@ service: starwars-api
 package:
   individually: true
   exclude:
-    - handlers/**
+    - src/infrastructure/lambdas/**
 
 custom:
   dynamodbTable: StarWarsResources
@@ -31,7 +31,7 @@ plugins:
 
 functions:
   getResource:
-    handler: handlers/getResource.handler
+    handler: src/infrastructure/lambdas/getResource.handler
     events:
       - http:
           path: /get-resource
@@ -40,10 +40,10 @@ functions:
           documentation: ${file(serverless.doc.yml):endpoints.getResource}
     package:
       include:
-        - handlers/getResource.js
+        - src/infrastructure/lambdas/getResource.js
 
   createResource:
-    handler: handlers/createResource.handler
+    handler: src/infrastructure/lambdas/createResource.handler
     events:
       - http:
           path: /create-resource
@@ -52,7 +52,7 @@ functions:
           documentation: ${file(serverless.doc.yml):endpoints.createResource}
     package:
       include:
-        - handlers/createResource.js
+        - src/infrastructure/lambdas/createResource.js
 
 resources:
   Resources:
