@@ -1,5 +1,5 @@
 /**
- * Use for check the validness of the condition and throw an error in case otherwise
+ * Use to check the validity of the condition and throw an error in case otherwise
  *
  * @param {boolean} condition - Condition to validate
  * @param {string} message - Message in case of error
