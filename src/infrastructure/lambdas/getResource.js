@@ -20,6 +20,8 @@ const getHandler = (repository = new DynamoDBRepository(SWResourcesTable)) => {
       };
     }
 
+    console.log({ resource });
+
     try {
       const data = id
         ? await service.getResourceById(resource, parseInt(id))

@@ -1,6 +1,7 @@
 const AWS = require('aws-sdk');
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 const ResourceRepository = require('@domain/ports/ResourceRepository');
+const { invariant } = require('@libs/invariant');
 
 class DynamoDBRepository extends ResourceRepository {
   constructor(tableName) {
@@ -53,9 +54,10 @@ class DynamoDBRepository extends ResourceRepository {
 
     try {
       const result = await dynamoDB.get(params).promise();
-      if (!result.Item) {
-        throw new Error(`Resource ${resourceType} with id ${id} not found`);
-      }
+      invariant(
+        result.Item,
+        `Resource ${resourceType} with id ${id} not found`
+      );
       return result.Item;
     } catch (error) {
       console.error('Error fetching resource from DynamoDB:', error);
